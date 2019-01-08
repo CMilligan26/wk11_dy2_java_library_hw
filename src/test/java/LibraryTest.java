@@ -28,7 +28,10 @@ public class LibraryTest {
 
     @Test
     public void canRemoveBook(){
-        
+        library.addBook(book);
+        assertEquals(1, library.countBooks());
+        assertEquals(book, library.removeBook());
+        assertEquals(0, library.countBooks());
     }
 
     @Test
@@ -67,4 +70,18 @@ public class LibraryTest {
         assertEquals(0, library.countBooks());
     }
 
+    @Test
+    public void canRecordGenreOfAddedBookAndNumberOfBooksForOneBook(){
+        library.addBook(book);
+        assertEquals(1, library.getNumberOfBooksInGenre(book.getGenre()));
+    }
+
+    @Test
+    public void canRecordGenreOfAddedBookAndNumberOfBooksForSeveralBooks(){
+        Library libraryBiggerCapacity = new Library(5);
+        libraryBiggerCapacity.addBook(book);
+        libraryBiggerCapacity.addBook(book);
+        libraryBiggerCapacity.addBook(book);
+        assertEquals(3, libraryBiggerCapacity.getNumberOfBooksInGenre(book.getGenre()));
+    }
 }
